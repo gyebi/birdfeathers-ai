@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BirdFeathers Poultry Calculator</title>
+  <link rel="stylesheet" href="calc.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <h1>Poultry Calculator</h1>
+    <p class="subtitle">Track costs, revenue, and profit in seconds</p>
+  </header>
+
+  <main class="app">
+    <section class="card" id="expenditure">
+      <h2>Expenditure</h2>
+
+      <form class="form-grid">
+        <label for="flockcalc">Flock Cost</label>
+        <input type="number" id="flockcalc"  placeholder=0.00 />
+
+        <label for="feedcalc">Feed Cost</label>
+        <input type="number" id="feedcalc"  placeholder=0.00 />
+
+        <label for="drugvacc">Drug & Vaccine Cost</label>
+        <input type="number" id="drugvacc"  placeholder=0.00 />
+
+        <label for="coopcalc">Coop Cost</label>
+        <input type="number" id="coopcalc"  placeholder=0.00 />
+
+        <label for="misccalc">Miscellaneous</label>
+        <input type="number" id="misccalc"  placeholder=0.00 />
+      </form>
+
+      <p class="total" id="exptotal">Total Expenditure: <span>$0.00</span></p>
+    </section>
+
+    <section class="card" id="revenue">
+      <h2>Revenue</h2>
+
+      <form class="form-grid">
+        <label for="birdsale">Birds Sold</label>
+        <input type="number" id="birdsale"  placeholder=0.00 />
+
+        <label for="eggsale">Eggs Sold</label>
+        <input type="number" id="eggsale" placeholder=0.00 />
+      </form>
+
+      <p class="total" id="revtotal">Total Revenue: <span>$0.00</span></p>
+    </section>
+
+    <section class="card" id="profitloss">
+      <h2>Profit / Loss</h2>
+      <p class="profit" id="income">Profit / Loss: <span>$0.00</span></p>
+    </section>
+  </main>
+
+  <!-- Sticky bottom action (app style) -->
+  <footer class="action-bar">
+    <button id="submit" type="button">Calculate P &amp; L</button>
+  </footer>
+
+  <script src="birdcalc.js"></script>
+</body>
+</html>

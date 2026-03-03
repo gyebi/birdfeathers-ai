@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #eaeaf4;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+/* Phone Frame */
+.phone {
+  width: 390px;
+  height: 844px;
+  background: #fff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+/* Status Bar */
+.status-bar {
+  height: 28px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Hero */
+.hero {
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    #3b82f6 0%,
+    #60a5fa 45%,
+    #ffffff 75%
+  );
+  position: relative;
+  padding-top: 40px;
+}
+
+/* Top Navigation */
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.brand {
+  font-style: italic;
+}
+
+.menu {
+  font-size: 13px;
+}
+
+/* Hero Text */
+.hero-content {
+  padding: 20px;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 40px;
+  line-height: 1.1;
+  margin: 0 0 16px;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  opacity: 0.9;
+}
+
+.divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  margin-top: 20px;
+}
+
+/* Hero Image */
+.hero-image {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 24px 24px 0 0;
+  position: absolute;
+  bottom: 80px;
+}
+
+/* CTA */
+.cta {
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  right: 16px;
+  background: white;
+  border-radius: 999px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cta span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.cta button {
+  border: none;
+  background: #111827;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
