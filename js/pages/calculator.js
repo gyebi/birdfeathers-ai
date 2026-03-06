@@ -169,16 +169,12 @@ if (rateOfLay >= threshold) {
 
 totalLayerRevenue = eggRevenue + resaleRevenue;
  
-if(state.birds.layers > 0) {
-if (rateOfLay < threshold) {
+if(state.birds.layers > 0 && (rateOfLay < threshold) ) {
+
+  document.getElementById("eggRevenue").style.color = "orange";
   console.warn("Layer productivity below threshold — consider culling.");
 }
 
-if (rateOfLay < threshold) {
-  document.getElementById("layerRevenue").style.color = "orange";
-}
-
-}
 
   broilerRevenueEl.textContent = format(broilerRevenue);
 
