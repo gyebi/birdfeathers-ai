@@ -1,9 +1,14 @@
 import { state } from "../state.js";
 import { navigate } from "../router.js";
 import { getAllCycles } from "./history.js";
+import { formatMoney } from "../currency.js";
 
 
 export function init() {
+
+  const currency = state.settings.currency;
+  const locale = state.settings.locale;
+
   const chickCostEl = document.getElementById("chickCost");
   const feedCostEl = document.getElementById("feedCost");
   const totalCostEl = document.getElementById("totalCost");
@@ -24,11 +29,11 @@ export function init() {
   let broilerRevenue = 0;
 
   // Format
-  const format = value =>
-    value.toLocaleString(undefined, {
-      style: "currency",
-      currency: "USD"
-    });
+const format = value =>
+  value.toLocaleString(state.settings.locale, {
+    style: "currency",
+    currency: state.settings.currency
+  });
 
   
 

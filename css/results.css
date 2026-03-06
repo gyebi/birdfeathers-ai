@@ -1,0 +1,24 @@
+.results-section{
+  margin-top:20px;
+}
+
+.results-section h2{
+  color:#2E7D32;
+  margin-bottom:10px;
+}
+
+.results-profit{
+  font-weight:bold;
+}
+
+.results-warning{
+  background:#fff7e6;
+  padding:12px;
+  border-radius:8px;
+}
+
+.results-story {
+
+    text-align: left;
+
+}

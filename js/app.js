@@ -1,32 +1,63 @@
 import { navigate } from "./router.js";
 import { state } from "./state.js";
+import { loadState } from "./storage.js"
 
 
 
+// Root container
+const app = document.getElementById("app");
 
-// 1) Load the first screen
+// Load saved state
+const savedBirdType = loadState("birdType");
+console.log("Saved bird type:", savedBirdType);
+
+const savedState = loadState("birdfeathersState");
+
+if(savedState){
+  Object.assign (state, savedState);
+}
+
+//start app
 navigate("home");
 console.log("Initial app state:", state);
 
 
-// 2) After every navigation, attach the right button events
-/*
-window.addEventListener("route:changed", (e) => {
-  const route = e.detail;
+// -------------------------------
+// Bottom Navigation
+// -------------------------------
 
-  if (route === "home") {
-    document.getElementById("goBatch")?.addEventListener("click", () => {
-      navigate("batch-setup");
-    });
-  }
+const navButtons = document.querySelectorAll(".bottom-nav button");
 
-  if (route === "batch-setup") {
-    document.getElementById("goHome")?.addEventListener("click", () => {
-      navigate("home");
-    });
-  }
+navButtons.forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    const screen = btn.dataset.screen;
+
+    navigate(screen);
+
+    navButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+  });
+
 });
-*/
+
+// -------------------------------
+// Service Worker
+// -------------------------------
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(() => console.log("Service Worker registered"))
+      .catch(err => console.log("SW registration failed:", err));
+
+  });
+}
+
+
 
 window.addEventListener("go:batch", () => navigate("batch-setup"));
 window.addEventListener("go:home", () => navigate("home"));

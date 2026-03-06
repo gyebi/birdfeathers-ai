@@ -106,6 +106,15 @@ results: {
   }
 },
 
+settings: {
+
+  country: "ghana",
+  currency: "GHS",
+  locale: "en-GH",
+  language: "en"
+
+},
+
 summary: {
   version: 1,
   lastSavedAt: null,

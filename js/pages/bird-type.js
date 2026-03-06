@@ -1,5 +1,7 @@
 import { state } from "../state.js";
 import { navigate } from "../router.js";
+import { saveState } from "../storage.js"
+
 
 export function init() {
   const buttons = document.querySelectorAll("[data-type]");
@@ -16,4 +18,17 @@ export function init() {
       navigate("quantity");
     });
   });
+
+
+buttons.forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    const type = btn.dataset.type
+
+    saveState("birdType", type)
+
+  });
+
+});
 }

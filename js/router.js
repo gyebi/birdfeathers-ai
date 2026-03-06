@@ -9,7 +9,10 @@ const routes = {
   "feed-market-prices": "pages/feed-market-prices.html",
   feed:"pages/feed.html",
   revenue:"pages/revenue.html",
-  calculator: "pages/calculator.html"
+  calculator: "pages/calculator.html",
+
+  help: "pages/help.html",
+  results: "pages/results.html"
 };
 
 
