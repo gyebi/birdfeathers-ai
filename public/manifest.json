@@ -3,6 +3,7 @@
   "short_name": "BirdFeathers",
   "description": "A smart poultry farming calculator for broilers and layers.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#F5F7F6",
   "theme_color": "#2E7D32",
