@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "dev": "live-server public --open=index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
   "dependencies": {
     "dotenv": "^17.3.1"
   }

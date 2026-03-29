@@ -1,34 +1,39 @@
-/* APP HEADER */
-
-.app-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-
-  padding:16px;
-
-  background:linear-gradient(135deg,#2E7D32,#66BB6A);
-  color:white;
-
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 20;
+  width: min(100%, var(--shell-width));
+  height: var(--header-height);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.9rem;
+  padding: 1rem var(--shell-padding);
+  background:
+    linear-gradient(135deg, rgba(34, 66, 41, 0.96), rgba(56, 101, 59, 0.94)),
+    linear-gradient(180deg, rgba(213, 170, 72, 0.08), transparent);
+  color: white;
+  box-shadow: 0 12px 28px rgba(24, 39, 25, 0.18);
+  backdrop-filter: blur(14px);
 }
 
-
-/* LOGO */
-
-.logo{
-  font-size:1.8rem;
+.title-group {
+  min-width: 0;
 }
 
-
-/* TITLE GROUP */
-
-.title-group h1{
-  font-size:1.2rem;
-  margin:0;
+.title-group h1 {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.4rem;
+  color: #fff8ee;
 }
 
-.title-group span{
-  font-size:0.8rem;
-  opacity:0.9;
+.title-group span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  color: rgba(255, 247, 235, 0.82);
 }

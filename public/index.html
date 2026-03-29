@@ -6,6 +6,9 @@
     <title>BirdFeathers Poultry App</title>
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#2E7D32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/appheader.css" />
@@ -18,22 +21,31 @@
   <body>
     <div class="app-shell">
       <header class="app-header">
-        <div class="logo">
-          <img src="assets/birdfeathers_logo_512.png" alt="Logo" class="logo" />
-        </div>
         <div class="title-group">
           <h1>BirdFeathers</h1>
-          <span>Poultry Calculator</span>
+          <span>Farm planning companion</span>
         </div>
       </header>
 
       <div id="app"></div>
 
       <nav class="bottom-nav">
-        <button class = "active" data-screen="home">🏠 Home</button>
-        <button data-screen="calculator">🧮 Calculator</button>
-        <button data-screen="results">📊 Results</button>
-        <button data-screen="help">❓ Help</button>
+        <button class="active" data-screen="home" aria-label="Home">
+          <span class="nav-icon">⌂</span>
+          <span class="nav-label">Home</span>
+        </button>
+        <button data-screen="calculator" aria-label="Calculator">
+          <span class="nav-icon">◫</span>
+          <span class="nav-label">Calculator</span>
+        </button>
+        <button data-screen="results" aria-label="Results">
+          <span class="nav-icon">◌</span>
+          <span class="nav-label">Results</span>
+        </button>
+        <button data-screen="help" aria-label="Help">
+          <span class="nav-icon">?</span>
+          <span class="nav-label">Help</span>
+        </button>
       </nav>
     </div>
 

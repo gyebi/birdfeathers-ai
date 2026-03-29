@@ -34,6 +34,12 @@ console.log("Initial app state:", state);
 
 const navButtons = document.querySelectorAll(".bottom-nav button");
 
+function setActiveNav(screen) {
+  navButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.screen === screen);
+  });
+}
+
 navButtons.forEach(btn => {
 
   btn.addEventListener("click", () => {
@@ -41,9 +47,6 @@ navButtons.forEach(btn => {
     const screen = btn.dataset.screen;
 
     navigate(screen);
-
-    navButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
 
   });
 
@@ -68,4 +71,5 @@ if ("serviceWorker" in navigator) {
 window.addEventListener("go:batch", () => navigate("batch-setup"));
 window.addEventListener("go:home", () => navigate("home"));
 window.addEventListener("route:changed", persistAppState);
+window.addEventListener("route:changed", event => setActiveNav(event.detail));
 window.addEventListener("beforeunload", persistAppState);
