@@ -75,36 +75,10 @@ export const state = {
 
 
   revenue: {
-    //broilerPricePerKg: 0,
-    broilerPricePerBird: 0,
-
     broilerSellPrice: 0,
-    
-    layerEggPricePerCrate: 0,
-    averageEggsPerLayer: 280, // yearly estimate
+    eggPrice: 0,
+    cratePrice: 0
   },
-
-results: {
-  feed: {
-    totalKg: 0,
-    totalBags: 0,
-    totalCost: 0
-  },
-
-  revenue: {
-    totalRevenue: 0
-  },
-
-  mortality: {
-    totalDead: 0,
-    mortalityRate: 0
-  },
-
-  profit: {
-    totalCost: 0,
-    netProfit: 0
-  }
-},
 
 settings: {
 

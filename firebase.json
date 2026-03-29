@@ -1,7 +1,7 @@
 {
   "functions": [
     {
-      "source": "functions",
+      "source": "public/functions",
       "codebase": "default",
       "disallowLegacyRuntimeConfig": true,
       "ignore": [
@@ -17,6 +17,7 @@
     "public": "public",
     "ignore": [
       "firebase.json",
+      "functions/**",
       "**/.*",
       "**/node_modules/**"
     ]

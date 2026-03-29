@@ -12,23 +12,11 @@ export function init() {
 
       state.flow.birdType = type;
       state.flow.step = 2;
+      saveState("birdType", type);
 
       console.log("Bird type selected:", type);
 
       navigate("quantity");
     });
   });
-
-
-buttons.forEach(btn => {
-
-  btn.addEventListener("click", () => {
-
-    const type = btn.dataset.type
-
-    saveState("birdType", type)
-
-  });
-
-});
 }

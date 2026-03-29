@@ -1,11 +1,15 @@
 import { navigate } from "./router.js";
 import { state } from "./state.js";
-import { loadState } from "./storage.js"
+import { loadState, saveState } from "./storage.js";
 
 
 
 // Root container
 const app = document.getElementById("app");
+
+function persistAppState() {
+  saveState("birdfeathersState", state);
+}
 
 // Load saved state
 const savedBirdType = loadState("birdType");
@@ -15,6 +19,8 @@ const savedState = loadState("birdfeathersState");
 
 if(savedState){
   Object.assign (state, savedState);
+} else if (savedBirdType) {
+  state.flow.birdType = savedBirdType;
 }
 
 //start app
@@ -61,4 +67,5 @@ if ("serviceWorker" in navigator) {
 
 window.addEventListener("go:batch", () => navigate("batch-setup"));
 window.addEventListener("go:home", () => navigate("home"));
-
+window.addEventListener("route:changed", persistAppState);
+window.addEventListener("beforeunload", persistAppState);

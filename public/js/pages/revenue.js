@@ -61,13 +61,10 @@ export function init() {
   saveBtn.addEventListener("click", () => {
 
     //Broiler Section 
-    state.revenue.broilerPricePerBird =
-      Number(document.getElementById("broilerPricePerBird")?.value) || 0;
-
-      state.mortality.broilerRate =
+    state.mortality.broilerRate =
       Number(document.getElementById("broilerMortality")?.value) || 0;
 
-      state.revenue.broilerSellPrice =
+    state.revenue.broilerSellPrice =
       Number(document.getElementById("broilerSellPrice")?.value) || 0;
 
     //Layer Section 

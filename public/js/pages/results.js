@@ -5,6 +5,11 @@ export function init(){
 
   const s = state.summary;
   const settings = state.settings;
+  const birdTypeLabels = {
+    broiler: "Broiler",
+    layer: "Layer",
+    both: "Broiler and Layer"
+  };
 
   const chickCost = s.costs.chickCost || 0;
   const feedCost =
@@ -25,7 +30,7 @@ export function init(){
 
 
   document.getElementById("rBirdType").textContent =
-    state.birds.type || "Not selected";
+    birdTypeLabels[state.flow.birdType] || "Not selected";
 
   document.getElementById("rBirds").textContent = birds;
 
