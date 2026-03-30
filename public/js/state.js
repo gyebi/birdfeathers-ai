@@ -20,12 +20,12 @@ export const state = {
     layerWeeks: 24, // time to first egg
 
     layer: {
-    dailyMarshFeedPerLayer: 0.115, // 0.115kg per day
-    rateOfLay: 0.0, // 80%
-    cycleDays: 540, // 18 months
-    cullThreshold: 0.6,
-    resalePricePerBird: 0
-  }
+      dailyMashFeedPerLayer: 0.115, // 0.115kg per day
+      cycleMonths: 18,
+      cullThreshold: 0.6,
+      resalePricePerBird: 0,
+      layProfile: "typical"
+    }
   },
 
   feed: {
@@ -103,6 +103,7 @@ summary: {
   revenue: {
     broilerRevenue: 0,
     eggRevenue: 0,
+    totalEggs: 0,
     resaleRevenue: 0,
     totalRevenue: 0
   },

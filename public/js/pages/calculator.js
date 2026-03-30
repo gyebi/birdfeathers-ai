@@ -2,11 +2,33 @@ import { state } from "../state.js";
 import { navigate } from "../router.js";
 import { formatMoney } from "../currency.js";
 
+const LAYER_PROFILE_CURVES = {
+  conservative: [
+    { label: "Early Lay", months: 2, rate: 0.65 },
+    { label: "Peak Lay", months: 6, rate: 0.85 },
+    { label: "Mid Decline", months: 6, rate: 0.75 },
+    { label: "Late Decline", months: 4, rate: 0.55 }
+  ],
+  typical: [
+    { label: "Early Lay", months: 2, rate: 0.70 },
+    { label: "Peak Lay", months: 6, rate: 0.90 },
+    { label: "Mid Decline", months: 6, rate: 0.80 },
+    { label: "Late Decline", months: 4, rate: 0.65 }
+  ],
+  "high-performance": [
+    { label: "Early Lay", months: 2, rate: 0.75 },
+    { label: "Peak Lay", months: 6, rate: 0.93 },
+    { label: "Mid Decline", months: 6, rate: 0.85 },
+    { label: "Late Decline", months: 4, rate: 0.70 }
+  ]
+};
+
 export function init() {
   const chickCostEl = document.getElementById("chickCost");
   const feedCostEl = document.getElementById("feedCost");
   const totalCostEl = document.getElementById("totalCost");
   const eggRevenueEl = document.getElementById("eggRevenue");
+  const projectedEggsEl = document.getElementById("projectedEggs");
   const broilerRevenueEl = document.getElementById("broilerRevenue");
   const resaleRevenueEl = document.getElementById("resaleRevenue");
   const totalLayerRevenueEl = document.getElementById("totalLayerRevenue");
@@ -60,38 +82,47 @@ export function init() {
   totalCostEl.textContent = format(totalCost);
 
   let eggRevenue = 0;
+  let totalEggs = 0;
   let resaleRevenue = 0;
   let totalLayerRevenue = 0;
 
   const broilerRevenue =
     survivingBroilers * (state.revenue.broilerSellPrice || 0);
 
-  const rateOfLay = state.production.layer.rateOfLay || 0;
+  const selectedProfile = state.production.layer.layProfile || "typical";
+  const layCurve =
+    LAYER_PROFILE_CURVES[selectedProfile] || LAYER_PROFILE_CURVES.typical;
+  const totalCurveMonths = layCurve.reduce((sum, phase) => sum + phase.months, 0);
+  const weightedRateSum = layCurve.reduce(
+    (sum, phase) => sum + (phase.rate * phase.months),
+    0
+  );
+  const averageLayRate =
+    totalCurveMonths > 0 ? weightedRateSum / totalCurveMonths : 0;
   const threshold = state.production.layer.cullThreshold;
+  totalEggs = layCurve.reduce((sum, phase) => {
+    const phaseDays = phase.months * 30;
+    return sum + (survivingLayers * phase.rate * phaseDays);
+  }, 0);
+  const eggPrice =
+    state.revenue.eggPrice ||
+    (state.revenue.cratePrice ? state.revenue.cratePrice / 30 : 0);
 
-  if (rateOfLay >= threshold) {
-    const dailyEggs = survivingLayers * rateOfLay;
-    const annualEggs =
-      dailyEggs * (state.production.layer?.cycleDays || 365);
-    const eggPrice =
-      state.revenue.cratePrice ? state.revenue.cratePrice / 30 : 0;
-
-    eggRevenue = annualEggs * eggPrice;
-  } else {
-    resaleRevenue =
-      survivingLayers *
-      (state.production.layer?.resalePricePerBird || 0);
-  }
+  eggRevenue = totalEggs * eggPrice;
+  resaleRevenue =
+    survivingLayers *
+    (state.production.layer?.resalePricePerBird || 0);
 
   totalLayerRevenue = eggRevenue + resaleRevenue;
 
-  if (state.birds.layers > 0 && rateOfLay < threshold) {
+  if (state.birds.layers > 0 && averageLayRate < threshold) {
     eggRevenueEl.style.color = "orange";
-    console.warn("Layer productivity below threshold — consider culling.");
+    console.warn("Average layer productivity is below the cull threshold.");
   }
 
   broilerRevenueEl.textContent = format(broilerRevenue);
   eggRevenueEl.textContent = format(eggRevenue);
+  projectedEggsEl.textContent = Math.round(totalEggs).toLocaleString(state.settings.locale);
   resaleRevenueEl.textContent = format(resaleRevenue);
   totalLayerRevenueEl.textContent = format(totalLayerRevenue);
 
@@ -120,6 +151,7 @@ export function init() {
 
   state.summary.revenue.broilerRevenue = broilerRevenue;
   state.summary.revenue.eggRevenue = eggRevenue;
+  state.summary.revenue.totalEggs = Math.round(totalEggs);
   state.summary.revenue.resaleRevenue = resaleRevenue;
   state.summary.revenue.totalRevenue = totalRevenue;
 

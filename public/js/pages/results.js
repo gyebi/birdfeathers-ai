@@ -22,6 +22,7 @@ export function init(){
 
   const totalCost = s.costs.totalCost || 0;
   const totalRevenue = s.revenue.totalRevenue || 0;
+  const totalEggs = s.revenue.totalEggs || 0;
   const profit = s.profit.value || 0;
 
   const birds =
@@ -53,6 +54,9 @@ export function init(){
 
   document.getElementById("rRevenue").textContent =
     formatMoney(totalRevenue, settings.locale, settings.currency);
+
+  document.getElementById("rEggs").textContent =
+    Math.round(totalEggs).toLocaleString(settings.locale);
 
   document.getElementById("rProfit").textContent =
     formatMoney(profit, settings.locale, settings.currency);
