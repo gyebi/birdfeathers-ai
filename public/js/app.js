@@ -33,7 +33,6 @@ console.log("Initial app state:", state);
 // -------------------------------
 
 const navButtons = document.querySelectorAll(".bottom-nav button");
-
 function setActiveNav(screen) {
   navButtons.forEach(btn => {
     btn.classList.toggle("active", btn.dataset.screen === screen);

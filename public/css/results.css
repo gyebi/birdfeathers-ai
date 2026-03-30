@@ -139,3 +139,16 @@
 .results-story {
   margin-bottom: 0;
 }
+
+.results-footer {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(46, 76, 44, 0.08);
+  text-align: center;
+}
+
+.results-footer p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
