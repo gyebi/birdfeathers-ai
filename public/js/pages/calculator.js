@@ -28,7 +28,6 @@ export function init() {
   const feedCostEl = document.getElementById("feedCost");
   const totalCostEl = document.getElementById("totalCost");
   const eggRevenueEl = document.getElementById("eggRevenue");
-  const projectedEggsEl = document.getElementById("projectedEggs");
   const broilerRevenueEl = document.getElementById("broilerRevenue");
   const resaleRevenueEl = document.getElementById("resaleRevenue");
   const totalLayerRevenueEl = document.getElementById("totalLayerRevenue");
@@ -122,7 +121,6 @@ export function init() {
 
   broilerRevenueEl.textContent = format(broilerRevenue);
   eggRevenueEl.textContent = format(eggRevenue);
-  projectedEggsEl.textContent = Math.round(totalEggs).toLocaleString(state.settings.locale);
   resaleRevenueEl.textContent = format(resaleRevenue);
   totalLayerRevenueEl.textContent = format(totalLayerRevenue);
 
