@@ -5,6 +5,10 @@ export function init(){
 
   const s = state.summary;
   const settings = state.settings;
+  const flockTotalBar = document.getElementById("flockTotalBar");
+  const flockSurvivingBar = document.getElementById("flockSurvivingBar");
+  const costBar = document.getElementById("costBar");
+  const revenueBar = document.getElementById("revenueBar");
   const birdTypeLabels = {
     broiler: "Broiler",
     layer: "Layer",
@@ -52,6 +56,14 @@ export function init(){
 
   document.getElementById("rProfit").textContent =
     formatMoney(profit, settings.locale, settings.currency);
+
+  const flockMax = Math.max(birds, 1);
+  const financialMax = Math.max(totalCost, totalRevenue, 1);
+
+  flockTotalBar.style.width = `${(birds / flockMax) * 100}%`;
+  flockSurvivingBar.style.width = `${(surviving / flockMax) * 100}%`;
+  costBar.style.width = `${(totalCost / financialMax) * 100}%`;
+  revenueBar.style.width = `${(totalRevenue / financialMax) * 100}%`;
 
 
   const story =

@@ -5,36 +5,43 @@ export function init() {
   const container = document.getElementById("quantityInputs");
   const continueBtn = document.getElementById("continueQuantity");
 
+  const renderField = (label, id, hint) => `
+    <label class="field-card">
+      <span class="field-label">${label}</span>
+      <span class="field-hint">${hint}</span>
+      <input id="${id}" type="number" min="0" placeholder="0" />
+    </label>
+  `;
+
   // Dynamically build inputs based on bird type
   if (state.flow.birdType === "broiler") {
-    container.innerHTML = `
-      <label>
-        Number of Broilers
-        <input id="broilerCount" type="number" min="0" />
-      </label>
-    `;
+    container.innerHTML = renderField(
+      "Number of Broilers",
+      "broilerCount",
+      "Include every broiler bird in this production cycle."
+    );
   }
 
   if (state.flow.birdType === "layer") {
-    container.innerHTML = `
-      <label>
-        Number of Layers
-        <input id="layerCount" type="number" min="0" />
-      </label>
-    `;
+    container.innerHTML = renderField(
+      "Number of Layers",
+      "layerCount",
+      "Include every layer bird expected to enter this flock."
+    );
   }
 
   if (state.flow.birdType === "both") {
     container.innerHTML = `
-      <label>
-        Number of Broilers
-        <input id="broilerCount" type="number" min="0" />
-      </label>
-
-      <label>
-        Number of Layers
-        <input id="layerCount" type="number" min="0" />
-      </label>
+      ${renderField(
+        "Number of Broilers",
+        "broilerCount",
+        "Include every broiler bird in this production cycle."
+      )}
+      ${renderField(
+        "Number of Layers",
+        "layerCount",
+        "Include every layer bird expected to enter this flock."
+      )}
     `;
   }
 

@@ -1,5 +1,1 @@
-export function init() {
-  
-    console.log("help page Loaded");
-    
-}
+export function init() {}

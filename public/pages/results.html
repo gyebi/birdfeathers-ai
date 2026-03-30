@@ -1,54 +1,86 @@
 <section class="page">
-
   <div class="card">
-
     <h1>Results Summary</h1>
+    <p>Here is the final estimate based on the flock, feed, mortality, and revenue assumptions you entered.</p>
 
-    <div class="results-section">
-
+    <div class="results-section cost-card">
       <h2>Flock Summary</h2>
+      <div class="graph-meta">
+        <span class="graph-label">Bird Type</span>
+        <strong id="rBirdType"></strong>
+      </div>
+      <div class="graph-panel">
+        <div class="bar-graph">
+          <div class="graph-track">
+            <div id="flockTotalBar" class="graph-fill graph-fill-total"></div>
+          </div>
+          <div class="graph-legend">
+            <span>Total Birds</span>
+            <strong id="rBirds"></strong>
+          </div>
+        </div>
 
-      <p>Bird Type: <span id="rBirdType"></span></p>
-
-      <p>Total Birds: <span id="rBirds"></span></p>
-
-      <p>Surviving Birds: <span id="rSurviving"></span></p>
-
+        <div class="bar-graph">
+          <div class="graph-track">
+            <div id="flockSurvivingBar" class="graph-fill graph-fill-surviving"></div>
+          </div>
+          <div class="graph-legend">
+            <span>Surviving Birds</span>
+            <strong id="rSurviving"></strong>
+          </div>
+        </div>
+      </div>
     </div>
 
-
-    <div class="results-section">
-
+    <div class="results-section cost-card">
       <h2>Financial Summary</h2>
+      <div class="graph-panel">
+        <div class="bar-graph">
+          <div class="graph-track">
+            <div id="costBar" class="graph-fill graph-fill-cost"></div>
+          </div>
+          <div class="graph-legend">
+            <span>Total Cost</span>
+            <strong id="rTotalCost"></strong>
+          </div>
+        </div>
 
-      <p>Chick Cost: <span id="rChickCost"></span></p>
+        <div class="bar-graph">
+          <div class="graph-track">
+            <div id="revenueBar" class="graph-fill graph-fill-revenue"></div>
+          </div>
+          <div class="graph-legend">
+            <span>Total Revenue</span>
+            <strong id="rRevenue"></strong>
+          </div>
+        </div>
 
-      <p>Feed Cost: <span id="rFeedCost"></span></p>
-
-      <p>Total Cost: <span id="rTotalCost"></span></p>
-
-      <p>Total Revenue: <span id="rRevenue"></span></p>
-
-      <p class="results-profit">Projected Profit: <span id="rProfit"></span></p>
-
+        <div class="mini-metrics">
+          <div class="mini-metric">
+            <span>Chick Cost</span>
+            <strong id="rChickCost"></strong>
+          </div>
+          <div class="mini-metric">
+            <span>Feed Cost</span>
+            <strong id="rFeedCost"></strong>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <div class="results-profit-card">
+      <h2>Projected Profit</h2>
+      <p id="rProfit"></p>
+    </div>
 
-    <div class="section">
-
+    <div class="results-section cost-card">
       <h2>Interpretation</h2>
-
-      <p id="results-story"></p>
-
+      <p id="results-story" class="results-story"></p>
     </div>
-
 
     <div class="results-warning">
-
       <h2>Costs Not Included</h2>
-
       <ul>
-
         <li>Vaccines</li>
         <li>Vitamins and medication</li>
         <li>Feeders and drinkers</li>
@@ -56,11 +88,8 @@
         <li>Transport</li>
         <li>Labour</li>
         <li>Land or housing costs</li>
-
       </ul>
-
     </div>
-
   </div>
 
 </section>

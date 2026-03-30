@@ -3,43 +3,56 @@ import { navigate } from "../router.js";
 
 export function init() {
 
-    const container = document.getElementById("feedMarketPriceInputs");
-    const saveBtn = document.getElementById("saveFeed");
+  const container = document.getElementById("feedMarketPriceInputs");
+  const saveBtn = document.getElementById("saveFeed");
+  const renderPriceField = (label, id, hint) => `
+    <label class="field-card">
+      <span class="field-label">${label}</span>
+      <span class="field-hint">${hint}</span>
+      <input id="${id}" type="number" min="0" step="0.01" placeholder="0.00" />
+    </label>
+  `;
 
  
 
   if (state.birds.broilers > 0) {
     container.innerHTML += `
-      <h2>Broiler Feed Prices</h2>
-      <label>
-    Broiler Starter - Feed Bag Price
-    <input id="broilerStarterBagPrice" type="number" min="0" step="0.01" />
-  </label>
-
-  <label>
-    Broiler Finisher - Feed Bag Price
-    <input id="broilerFinisherBagPrice" type="number" min="0" step="0.01" />
-  </label>
+      <div class="form-section">
+        <h2>Broiler Feed Prices</h2>
+        ${renderPriceField(
+          "Broiler Starter Feed Bag Price",
+          "broilerStarterBagPrice",
+          "Enter the market price for one broiler starter feed bag."
+        )}
+        ${renderPriceField(
+          "Broiler Finisher Feed Bag Price",
+          "broilerFinisherBagPrice",
+          "Enter the market price for one broiler finisher feed bag."
+        )}
+      </div>
     `;
   }
 
-    if (state.birds.layers > 0) {
+  if (state.birds.layers > 0) {
     container.innerHTML += `
-      <h2>Layer Feed Prices</h2>
-      <label>
-    Layer Starter - Feed Bag Price
-    <input id="layerStarterBagPrice" type="number" min="0" step="0.01" />
-  </label>
-
-  <label>
-    Layer Grower - Feed Bag Price
-    <input id="layerGrowerBagPrice" type="number" min="0" step="0.01" />
-  </label>
-
-  <label>
-    Layer Mash - Feed Bag Price
-    <input id="layerMashBagPrice" type="number" min="0" step="0.01" />
-  </label>
+      <div class="form-section">
+        <h2>Layer Feed Prices</h2>
+        ${renderPriceField(
+          "Layer Starter Feed Bag Price",
+          "layerStarterBagPrice",
+          "Enter the market price for one layer starter feed bag."
+        )}
+        ${renderPriceField(
+          "Layer Grower Feed Bag Price",
+          "layerGrowerBagPrice",
+          "Enter the market price for one layer grower feed bag."
+        )}
+        ${renderPriceField(
+          "Layer Mash Feed Bag Price",
+          "layerMashBagPrice",
+          "Enter the market price for one layer mash feed bag."
+        )}
+      </div>
     `;
   }
 
@@ -50,9 +63,6 @@ export function init() {
     state.feed.layers.layerStarter.bagPrice = Number(document.getElementById("layerStarterBagPrice")?.value) || 0;
     state.feed.layers.layerGrower.bagPrice = Number(document.getElementById("layerGrowerBagPrice")?.value) || 0;
     state.feed.layers.layerMash.bagPrice = Number(document.getElementById("layerMashBagPrice")?.value) || 0;
-  });
-
-  saveBtn.addEventListener("click", () => {
     navigate("feed");
   });
 

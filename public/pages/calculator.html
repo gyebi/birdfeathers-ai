@@ -1,5 +1,6 @@
 <section class="page">
   <h1>Cost & Revenue Calculator</h1>
+  <p>Review the full financial picture for this flock, then save the summary if you want to keep the estimate.</p>
 
   <div class="cost-card">
     <h3>Cost Breakdown</h3>
@@ -60,16 +61,18 @@
 
   <hr />
 
-  <div class="cost-card">
+  <div class="cost-card profit-card">
     <h3>Profit / Loss</h3>
 
     <div class="cost-row total">
-      <span></span>
+      <span>Outcome</span>
       <span id="profit">$0.00</span>
     </div>
   </div>
 
-  <button id="backBatch">← Back</button>
-   <button id="saveSummary">Save Summary</button>
+  <div class="action-row">
+    <button id="backBatch" class="secondary-btn">Back</button>
+    <button id="saveSummary" class="primary-btn">Save Summary</button>
+  </div>
 
 </section>

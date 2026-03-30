@@ -17,10 +17,22 @@ const feedRules = {
 
 export function init() {
   const summary = document.getElementById("feedSummary");
-  const bagInput = document.getElementById("bagPrice");
 
   const saveBtn = document.getElementById("saveFeed");
   const backBtn = document.getElementById("backFeed");
+  const formatMeasure = (value, unit) => unit ? `${value.toFixed(2)} ${unit}` : value.toFixed(2);
+  const renderMetric = (label, value) => `
+    <div class="summary-row">
+      <span>${label}</span>
+      <strong>${value}</strong>
+    </div>
+  `;
+  const renderSection = (title, rows) => `
+    <section class="cost-card">
+      <h2>${title}</h2>
+      ${rows.join("")}
+    </section>
+  `;
 
  
   const broilers = state.birds.broilers || 0;
@@ -118,45 +130,60 @@ export function init() {
 
 
   if (broilers > 0 && layers > 0) {
-  summary.innerHTML = `
-    <p>Broiler Starter Feed: ${broilerStarterKg.toFixed(2)} kg (${totalBagsStarter.toFixed(2)} bags)</p>
-    <p>Broiler Finisher Feed: ${broilerFinisherKg.toFixed(2)} kg (${totalBagsFinisher.toFixed(2)} bags)</p>
-    <p>Layer Starter Feed: ${layerStarterKg.toFixed(2)} kg (${totalBagsLayerStarter.toFixed(2)} bags)</p>
-    <p>Layer Grower Feed: ${layerGrowerKg.toFixed(2)} kg (${totalBagsLayerGrower.toFixed(2)} bags)</p>
-    <p>Layer Mash Feed: ${totalLayerMashKg.toFixed(2)} kg (${totalBagsLayerMash.toFixed(2)} bags)</p>
-    <h2>Feed Summary</h2>
-    <p>Total Feed Required: ${totalKg} kg</p>
-    <p>Equivalent Bags (50kg): ${totalBags.toFixed(2)}</p>
-    <p>Broiler Starter Cost per Bag: ${state.feed.broilers.broilerStarter.bagPrice.toFixed(2)} </p>
-    <p>Broiler Finisher Cost per Bag: ${state.feed.broilers.broilerFinisher.bagPrice.toFixed(2)} </p>
-    <p>Layer Starter Cost per Bag: ${state.feed.layers.layerStarter.bagPrice.toFixed(2)} </p>
-    <p>Layer Grower Cost per Bag: ${state.feed.layers.layerGrower.bagPrice.toFixed(2)} </p>
-    <p>Layer Mash Cost per Bag: ${state.feed.layers.layerMash.bagPrice.toFixed(2)} </p>
-  `;
+    summary.innerHTML = `
+      ${renderSection("Broiler Feed Breakdown", [
+        renderMetric("Starter Feed", `${formatMeasure(broilerStarterKg, "kg")} (${formatMeasure(totalBagsStarter, "bags")})`),
+        renderMetric("Finisher Feed", `${formatMeasure(broilerFinisherKg, "kg")} (${formatMeasure(totalBagsFinisher, "bags")})`)
+      ])}
+      ${renderSection("Layer Feed Breakdown", [
+        renderMetric("Starter Feed", `${formatMeasure(layerStarterKg, "kg")} (${formatMeasure(totalBagsLayerStarter, "bags")})`),
+        renderMetric("Grower Feed", `${formatMeasure(layerGrowerKg, "kg")} (${formatMeasure(totalBagsLayerGrower, "bags")})`),
+        renderMetric("Mash Feed", `${formatMeasure(totalLayerMashKg, "kg")} (${formatMeasure(totalBagsLayerMash, "bags")})`)
+      ])}
+      ${renderSection("Feed Summary", [
+        renderMetric("Total Feed Required", formatMeasure(totalKg, "kg")),
+        renderMetric("Equivalent Bags (50kg)", formatMeasure(totalBags, "bags")),
+        renderMetric("Broiler Starter Price per Bag", formatMeasure(state.feed.broilers.broilerStarter.bagPrice, "")),
+        renderMetric("Broiler Finisher Price per Bag", formatMeasure(state.feed.broilers.broilerFinisher.bagPrice, "")),
+        renderMetric("Layer Starter Price per Bag", formatMeasure(state.feed.layers.layerStarter.bagPrice, "")),
+        renderMetric("Layer Grower Price per Bag", formatMeasure(state.feed.layers.layerGrower.bagPrice, "")),
+        renderMetric("Layer Mash Price per Bag", formatMeasure(state.feed.layers.layerMash.bagPrice, ""))
+      ])}
+    `;
   } else if (broilers > 0) {
     summary.innerHTML = `
-    <p>Broiler Starter Feed: ${broilerStarterKg.toFixed(2)} kg (${totalBagsStarter.toFixed(2)} bags)</p>
-    <p>Broiler Finisher Feed: ${broilerFinisherKg.toFixed(2)} kg (${totalBagsFinisher.toFixed(2)} bags)</p>
-    <h2>Feed Summary</h2>
-    <p>Total Feed Required: ${totalKgB} kg</p>
-    <p>Equivalent Bags (50kg): ${totalBagsB.toFixed(2)}</p>
-    <p>Broiler Starter Cost per Bag: ${state.feed.broilers.broilerStarter.bagPrice.toFixed(2)} </p>
-    <p>Broiler Finisher Cost per Bag: ${state.feed.broilers.broilerFinisher.bagPrice.toFixed(2)} </p>
-  `;
+      ${renderSection("Broiler Feed Breakdown", [
+        renderMetric("Starter Feed", `${formatMeasure(broilerStarterKg, "kg")} (${formatMeasure(totalBagsStarter, "bags")})`),
+        renderMetric("Finisher Feed", `${formatMeasure(broilerFinisherKg, "kg")} (${formatMeasure(totalBagsFinisher, "bags")})`)
+      ])}
+      ${renderSection("Feed Summary", [
+        renderMetric("Total Feed Required", formatMeasure(totalKgB, "kg")),
+        renderMetric("Equivalent Bags (50kg)", formatMeasure(totalBagsB, "bags")),
+        renderMetric("Broiler Starter Price per Bag", formatMeasure(state.feed.broilers.broilerStarter.bagPrice, "")),
+        renderMetric("Broiler Finisher Price per Bag", formatMeasure(state.feed.broilers.broilerFinisher.bagPrice, ""))
+      ])}
+    `;
   } else if (layers > 0) {
     summary.innerHTML = `
-    <p>Layer Starter Feed: ${layerStarterKg.toFixed(2)} kg (${totalBagsLayerStarter.toFixed(2)} bags)</p>
-    <p>Layer Grower Feed: ${layerGrowerKg.toFixed(2)} kg (${totalBagsLayerGrower.toFixed(2)} bags)</p>
-    <p>Layer Mash Feed: ${totalLayerMashKg.toFixed(2)} kg (${totalBagsLayerMash.toFixed(2)} bags)</p>
-    <h2>Feed Summary</h2>
-    <p>Total Feed Required: ${totalKgL} kg</p>
-    <p>Equivalent Bags (50kg): ${totalBagsL.toFixed(2)}</p>
-    <p>Layer Starter Cost per Bag: ${state.feed.layers.layerStarter.bagPrice.toFixed(2)} </p>
-    <p>Layer Grower Cost per Bag: ${state.feed.layers.layerGrower.bagPrice.toFixed(2)} </p>
-    <p>Layer Mash Cost per Bag: ${state.feed.layers.layerMash.bagPrice.toFixed(2)} </p>
-  `;
+      ${renderSection("Layer Feed Breakdown", [
+        renderMetric("Starter Feed", `${formatMeasure(layerStarterKg, "kg")} (${formatMeasure(totalBagsLayerStarter, "bags")})`),
+        renderMetric("Grower Feed", `${formatMeasure(layerGrowerKg, "kg")} (${formatMeasure(totalBagsLayerGrower, "bags")})`),
+        renderMetric("Mash Feed", `${formatMeasure(totalLayerMashKg, "kg")} (${formatMeasure(totalBagsLayerMash, "bags")})`)
+      ])}
+      ${renderSection("Feed Summary", [
+        renderMetric("Total Feed Required", formatMeasure(totalKgL, "kg")),
+        renderMetric("Equivalent Bags (50kg)", formatMeasure(totalBagsL, "bags")),
+        renderMetric("Layer Starter Price per Bag", formatMeasure(state.feed.layers.layerStarter.bagPrice, "")),
+        renderMetric("Layer Grower Price per Bag", formatMeasure(state.feed.layers.layerGrower.bagPrice, "")),
+        renderMetric("Layer Mash Price per Bag", formatMeasure(state.feed.layers.layerMash.bagPrice, ""))
+      ])}
+    `;
   } else {
-    summary.innerHTML = `<p>No birds added. Please go back and enter bird details.</p>`;
+    summary.innerHTML = `
+      <section class="cost-card">
+        <p>No birds added. Please go back and enter bird details.</p>
+      </section>
+    `;
   }
 
   saveBtn.addEventListener("click", () => {

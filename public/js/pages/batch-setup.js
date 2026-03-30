@@ -5,6 +5,13 @@ export function init() {
   const summary = document.getElementById("birdSummary");
   const priceContainer = document.getElementById("priceInputs");
   const saveBtn = document.getElementById("saveBatch");
+  const renderPriceField = (label, id, hint) => `
+    <label class="field-card">
+      <span class="field-label">${label}</span>
+      <span class="field-hint">${hint}</span>
+      <input id="${id}" type="number" min="0" step="0.01" placeholder="0.00" />
+    </label>
+  `;
 
   console.log("Batch screen loaded");
   console.log(document.getElementById("birdSummary"));
@@ -13,42 +20,40 @@ export function init() {
     // Display selected birds
     if(summary){
   summary.textContent = `
-    Broilers: ${state.birds.broilers} 
-    | Layers: ${state.birds.layers}
+    Flock summary: ${state.birds.broilers} broilers and ${state.birds.layers} layers
   `;
     }
 
 
     // Build pricing inputs dynamically
   if (state.flow.birdType === "broiler") {
-    priceContainer.innerHTML = `
-      <label>
-        Broiler Price per Chick
-        <input id="broilerPrice" type="number" min="0" step="0.01" />
-      </label>
-    `;
+    priceContainer.innerHTML = renderPriceField(
+      "Broiler Price per Chick",
+      "broilerPrice",
+      "Enter the purchase cost for one broiler chick."
+    );
   }
 
   if (state.flow.birdType === "layer") {
-    priceContainer.innerHTML = `
-      <label>
-        Layer Price per Chick
-        <input id="layerPrice" type="number" min="0" step="0.01" />
-      </label>
-    `;
+    priceContainer.innerHTML = renderPriceField(
+      "Layer Price per Chick",
+      "layerPrice",
+      "Enter the purchase cost for one layer chick."
+    );
   }
 
   if (state.flow.birdType === "both") {
     priceContainer.innerHTML = `
-      <label>
-        Broiler Price per Chick
-        <input id="broilerPrice" type="number" min="0" step="0.01" />
-      </label>
-
-      <label>
-        Layer Price per Chick
-        <input id="layerPrice" type="number" min="0" step="0.01" />
-      </label>
+      ${renderPriceField(
+        "Broiler Price per Chick",
+        "broilerPrice",
+        "Enter the purchase cost for one broiler chick."
+      )}
+      ${renderPriceField(
+        "Layer Price per Chick",
+        "layerPrice",
+        "Enter the purchase cost for one layer chick."
+      )}
     `;
   }
 
